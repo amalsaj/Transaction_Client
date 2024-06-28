@@ -77,6 +77,7 @@ const Credit = () => {
             <div>
               <label>Name:</label>
               <select
+                className="sel"
                 value={formName}
                 onChange={(e) => setFormName(e.target.value)}
                 required
