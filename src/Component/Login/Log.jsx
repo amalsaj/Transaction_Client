@@ -10,20 +10,22 @@ const Log = () => {
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
+    e.preventDefault(); // Prevent default form submission
     try {
-      const response = await axios.post("/login", { username, password });
-      console.log(response.data);
-      if (response.data.credit === "true") {
-        navigate(`/Credit?username=${username}`);
-      } else if (response.data.credit === "false") {
-        navigate(`/debit?username=${username}`);
+      const res = await axios.post("http://127.0.0.1:5000/login", { username, password });
+      console.log(res);
+
+      if (res.data.message === "true") {
+        navigate("/Credit");
+      } else if (res.data.message === "false") {
+        navigate("/Debit");
       } else {
         setError("An error occurred. Please try again.");
       }
-    } catch (error) {
-      if (error.response && error.response.data) {
-        const errorMessage = error.response.data || "An error occurred";
-        setError(errorMessage);
+    } catch (err) {
+      console.log(err);
+      if (err.response && err.response.data) {
+        setError(err.response.data.message);
       } else {
         setError("An error occurred. Please try again.");
       }
@@ -50,6 +52,7 @@ const Log = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+        {error && <p className="error">{error}</p>}
         <button type="submit">Login</button>
       </form>
     </div>
