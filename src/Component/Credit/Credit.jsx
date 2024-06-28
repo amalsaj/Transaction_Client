@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import './Credit.css'
+import { axios } from 'axios';
 
 
 const Credit = () => {
@@ -8,12 +9,19 @@ const Credit = () => {
   const searchParams = new URLSearchParams(location.search);
   const username = searchParams.get("username");
 
-  const [data, setData] = useState([
-    { name: "user1", balance: 1200 },
-    { name: "user2", balance: 1500 },
-    { name: "user3", balance: 1800 },
-    { name: "user4", balance: 2000 },
-  ]);
+  
+
+  // const [data, setData] = useState([
+  //   { name: "user1", balance: 1200 },
+  //   { name: "user2", balance: 1500 },
+  //   { name: "user3", balance: 1800 },
+  //   { name: "user4", balance: 2000 },
+  // ]);
+
+  useEffect(()=>{
+    axios.get("http://127.0.0.1:5000/getUsers")
+    .then((res))
+  },[])
 
   const [showForm, setShowForm] = useState(false);
   const [formName, setFormName] = useState('');
