@@ -1,23 +1,32 @@
-import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import './Credit.css'
-
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useLocation } from "react-router-dom";
+import "./Credit.css";
 
 const Credit = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const username = searchParams.get("username");
 
-  const [data, setData] = useState([
-    { name: "user1", balance: 1200 },
-    { name: "user2", balance: 1500 },
-    { name: "user3", balance: 1800 },
-    { name: "user4", balance: 2000 },
-  ]);
+  const [user_data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get("http://127.0.0.1:5000/getData");
+        console.log(res.data);
+        setData(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const [showForm, setShowForm] = useState(false);
-  const [formName, setFormName] = useState('');
-  const [formBalance, setFormBalance] = useState('');
+  const [formName, setFormName] = useState("");
+  const [formBalance, setFormBalance] = useState("");
 
   const handleDebitClick = () => {
     setShowForm(true);
@@ -25,8 +34,10 @@ const Credit = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    const updatedData = data.map(item => 
-      item.name === formName ? { ...item, balance: parseFloat(formBalance) } : item
+    const updatedData = user_data.map((item) =>
+      item.name === formName
+        ? { ...item, balance: parseFloat(formBalance) }
+        : item
     );
     setData(updatedData);
     setShowForm(false);
@@ -42,23 +53,23 @@ const Credit = () => {
           <thead>
             <tr>
               <th>Name</th>
+              <th>Updated Time</th>
               <th>Balance</th>
             </tr>
           </thead>
           <tbody>
-            {data.map((item, index) => (
-              <tr key={index}>
-                <td>{item.name}</td>
-                <td>{item.balance}</td>
-              </tr>
-            ))}
+            {user_data &&
+              user_data.map((item, index) => (
+                <tr key={index}>
+                  <td>{item.name}</td>
+                  <td>{item.updatedAt}</td>
+                  <td>{item.amount}</td>
+                </tr>
+              ))}
           </tbody>
         </table>
 
-        <button
-          className="debit-button"
-          onClick={handleDebitClick}
-        >
+        <button className="debit-button" onClick={handleDebitClick}>
           Credit
         </button>
 
@@ -66,12 +77,21 @@ const Credit = () => {
           <form className="debit-form" onSubmit={handleFormSubmit}>
             <div>
               <label>Name:</label>
-              <input
-                type="text"
+              <select
+                className="sel"
                 value={formName}
                 onChange={(e) => setFormName(e.target.value)}
                 required
-              />
+              >
+                <option value="" disabled>
+                  Select user
+                </option>
+                {user_data.map((user, index) => (
+                  <option key={index} value={user.name}>
+                    {user.name}
+                  </option>
+                ))}
+              </select>
             </div>
             <div>
               <label>New Balance:</label>
