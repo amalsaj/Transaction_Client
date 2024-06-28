@@ -12,13 +12,16 @@ const Log = () => {
   const handleLogin = async (e) => {
     e.preventDefault(); // Prevent default form submission
     try {
-      const res = await axios.post("http://127.0.0.1:5000/login", { username, password });
+      const res = await axios.post("http://127.0.0.1:5000/login", {
+        username,
+        password,
+      });
       console.log(res);
 
       if (res.data.message === "true") {
-        navigate("/Credit");
+        navigate(`/Credit?username=${username}`);
       } else if (res.data.message === "false") {
-        navigate("/Debit");
+        navigate(`/Debit?username=${username}`);
       } else {
         setError("An error occurred. Please try again.");
       }
