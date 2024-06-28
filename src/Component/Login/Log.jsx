@@ -23,25 +23,25 @@ const Log = () => {
       if (res.data.message === "true") {
         toast.success("Credit only");
         setTimeout(() => {
-          navigate("/Credit");
+          navigate(`/Credit?username=${username}`);
         }, 2000);
       } else if (res.data.message === "false") {
-        toast.success("Debit only")
+        toast.success("Debit only");
         setTimeout(() => {
-          navigate('/Debit');
+          navigate(`/Debit?username=${username}`);
         }, 2000); 
       } else {
         setError("An error occurred. Please try again.");
-        toast.error("Error in login")
+        toast.error("Error in login");
       }
     } catch (err) {
       console.log(err);
       if (err.response && err.response.data) {
         setError(err.response.data.message);
-        toast.error("Error in login")
+        toast.error("Error in login");
       } else {
         setError("An error occurred. Please try again.");
-        toast.error("Error in login")
+        toast.error("Error in login");
       }
     }
   };
