@@ -76,7 +76,7 @@ const Credit = () => {
         {showForm && (
           <form className="debit-form" onSubmit={handleFormSubmit}>
             <div>
-              <label>Name:</label>
+              <label>Choose User:</label>
               <select
                 className="sel"
                 value={formName}

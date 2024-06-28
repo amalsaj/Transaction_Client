@@ -1,11 +1,7 @@
-
-
-
-
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useLocation } from 'react-router-dom';
-import './Debit.css';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useLocation } from "react-router-dom";
+import "./Debit.css";
 
 const Debit = () => {
   const location = useLocation();
@@ -62,13 +58,14 @@ const Debit = () => {
             </tr>
           </thead>
           <tbody>
-            {user_data && user_data.map((item, index) => (
-              <tr key={index}>
-                <td>{item.name}</td>
-                <td>{item.updatedAt}</td>
-                <td>{item.amount}</td>
-              </tr>
-            ))}
+            {user_data &&
+              user_data.map((item, index) => (
+                <tr key={index}>
+                  <td>{item.name}</td>
+                  <td>{item.updatedAt}</td>
+                  <td>{item.amount}</td>
+                </tr>
+              ))}
           </tbody>
         </table>
 
@@ -79,13 +76,16 @@ const Debit = () => {
         {showForm && (
           <form className="debit-form" onSubmit={handleFormSubmit}>
             <div>
-              {/* <label>Name:</label> */}
-              <select className='sel'
+              <label>Choose User:</label>
+              <select
+                className="sel"
                 value={formName}
                 onChange={(e) => setFormName(e.target.value)}
                 required
               >
-                <option value="" disabled>Select user</option>
+                <option value="" disabled>
+                  Select user
+                </option>
                 {user_data.map((user, index) => (
                   <option key={index} value={user.name}>
                     {user.name}
