@@ -1,0 +1,95 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f0f0f0;
+    min-height: 100vh;
+  }
+  
+  .welcome {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .cont-1 {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+  }
+  
+  .balance-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+  }
+  
+  .balance-table th,
+  .balance-table td {
+    border: 1px solid #ddd;
+    padding: 0.75rem;
+    text-align: left;
+  }
+  
+  .balance-table th {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .balance-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .debit-button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  
+  .debit-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .debit-form {
+    margin-top: 20px;
+  }
+  
+  .debit-form div {
+    margin-bottom: 1rem;
+  }
+  
+  .debit-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  .debit-form input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .debit-form button {
+    width: 100%;
+    padding: 0.5rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .debit-form button:hover {
+    background-color: #0056b3;
+  }
+  
